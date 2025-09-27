@@ -14,11 +14,15 @@ public class HelloWorld extends OpMode {
 
     @Override
     public void init() {
-        telemetry.addData("Hello","Vee");
+
+        telemetry.addData("Hello","Mylan(cuz she my world)");
+
     }
 
     @Override
     public void loop() {
+
+
 
     }
 }
