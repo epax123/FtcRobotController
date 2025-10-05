@@ -35,7 +35,7 @@ public class FGCRobotMotors {
     ascension.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
     DTleft.setDirection(DcMotorSimple.Direction.REVERSE);
-    servoLPos.setDirection(Servo.Direction.REVERSE);
+    servoRPos.setDirection(Servo.Direction.REVERSE);
     }
 
     public void setAscensionSpeed(double Ascensionspeed){
