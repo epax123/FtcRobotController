@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.machanisms.FGCRobotMotors;
+@Disabled
 @TeleOp
 public class FGCRobotProg extends OpMode {
     FGCRobotMotors Motors = new FGCRobotMotors();
@@ -23,7 +25,7 @@ public class FGCRobotProg extends OpMode {
         double X = gamepad1.right_stick_x;
         double Y = gamepad1.left_stick_y;
         double DTL = ((Direction*Y) - X)/SpeedDeviders;
-        double DTR = ((Direction*Y) + X)/SpeedDeviders ;
+        double DTR = ((Direction*Y) + X)/SpeedDeviders;
         boolean DPad1Up = gamepad1.dpad_up;
         boolean Dpad1Down = gamepad1.dpad_down;
         boolean LBump2 = gamepad2.left_bumper;
@@ -71,7 +73,7 @@ public class FGCRobotProg extends OpMode {
 
         if (Gear == 1){
             Gear = 1;
-        } else if (Gear > 3) {
+        } else if (Gear == 3) {
             Gear = 3;
         }
 
