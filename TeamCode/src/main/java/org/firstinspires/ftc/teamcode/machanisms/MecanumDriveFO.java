@@ -6,9 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
 public class MecanumDriveFO {
 
@@ -28,6 +26,11 @@ public class MecanumDriveFO {
         frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+        frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         imu = hwMap.get(IMU.class, "imu");
 
         RevHubOrientationOnRobot RevOrientation = new RevHubOrientationOnRobot(
@@ -44,7 +47,7 @@ public class MecanumDriveFO {
         double frontRightPower = forwards + strafe + rotate;
         double backRightPower = forwards - strafe + rotate;
 
-        double maxPower = 1.0;
+        double maxPower = 0.5;
         double maxSpeed = 1.0;
 
         maxPower = Math.max(maxPower, Math.abs(frontLeftPower));
@@ -60,33 +63,33 @@ public class MecanumDriveFO {
     }
 
     public void driveFieldReltive(double forward, double strafe, double rotate) {
-        double theta = Math.atan2(forward, strafe);
-        double r = Math.hypot(strafe, forward);
+        double theta = Math.atan2(strafe, forward);
+        double r = Math.hypot(forward, strafe);
 
-        theta = (theta -
-                imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
+        theta = (AngleUnit.normalizeRadians( theta -
+                imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS)));
 
-        double newForward = r * Math.sin(theta);
-        double newStrafe = r * Math.cos(theta);
+        double newForward = r * Math.cos(theta);
+        double newStrafe = r * Math.sin(theta);
 
         this.drive(newForward, newStrafe, rotate);
     }
-    public double getNewForward(double forward, double strafe) {
-        double theta = Math.atan2(forward, strafe);
-        double r = Math.hypot(strafe, forward);
-
-        theta = (theta -
-                imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
-
-        return r * Math.sin(theta);
-    }
-    public double getNewStrafe (double forward, double strafe) {
-        double theta = Math.atan2(forward, strafe);
-        double r = Math.hypot(strafe, forward);
-
-        theta = (theta -
-                imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
-
-        return  r * Math.cos(theta);
-    }
+//    public double getNewForward(double forward, double strafe) {
+//        double theta = Math.atan2(forward, strafe);
+//        double r = Math.hypot(strafe, forward);
+//
+//        theta = (theta -
+//                imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
+//
+//        return r * Math.sin(theta);
+//    }
+//    public double getNewStrafe (double forward, double strafe) {
+//        double theta = Math.atan2(forward, strafe);
+//        double r = Math.hypot(strafe, forward);
+//
+//        theta = (theta -
+//                imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
+//
+//        return  r * Math.cos(theta);
+//    }
 }
