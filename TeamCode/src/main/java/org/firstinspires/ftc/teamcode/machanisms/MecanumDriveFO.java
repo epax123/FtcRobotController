@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.machanisms;
 
+import com.qualcomm.hardware.lynx.commands.core.LynxI2cConfigureChannelCommand;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -13,6 +14,8 @@ public class MecanumDriveFO {
     private DcMotor frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
     private IMU imu;
 
+    double maxSpeed = .75;
+
     public void init(HardwareMap hwMap) {
         frontLeftMotor = hwMap.get(DcMotor.class, "front_left_drive");
         backLeftMotor = hwMap.get(DcMotor.class, "back_left_drive");
@@ -20,6 +23,7 @@ public class MecanumDriveFO {
         backRightMotor = hwMap.get(DcMotor.class, "back_right_drive");
 
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -34,7 +38,7 @@ public class MecanumDriveFO {
         imu = hwMap.get(IMU.class, "imu");
 
         RevHubOrientationOnRobot RevOrientation = new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.FORWARD,
+                RevHubOrientationOnRobot.LogoFacingDirection.BACKWARD,
                 RevHubOrientationOnRobot.UsbFacingDirection.UP
         );
 
@@ -47,8 +51,7 @@ public class MecanumDriveFO {
         double frontRightPower = forwards + strafe + rotate;
         double backRightPower = forwards - strafe + rotate;
 
-        double maxPower = 0.5;
-        double maxSpeed = 1.0;
+        double maxPower = 1;
 
         maxPower = Math.max(maxPower, Math.abs(frontLeftPower));
         maxPower = Math.max(maxPower, Math.abs(backLeftPower));
@@ -74,22 +77,12 @@ public class MecanumDriveFO {
 
         this.drive(newForward, newStrafe, rotate);
     }
-//    public double getNewForward(double forward, double strafe) {
-//        double theta = Math.atan2(forward, strafe);
-//        double r = Math.hypot(strafe, forward);
-//
-//        theta = (theta -
-//                imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
-//
-//        return r * Math.sin(theta);
-//    }
-//    public double getNewStrafe (double forward, double strafe) {
-//        double theta = Math.atan2(forward, strafe);
-//        double r = Math.hypot(strafe, forward);
-//
-//        theta = (theta -
-//                imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
-//
-//        return  r * Math.cos(theta);
-//    }
+
+    public void variableSpeed(boolean dpadDown, boolean dpadUp){
+        if (dpadUp){
+            maxSpeed = 0.75;
+        } else if (dpadDown) {
+            maxSpeed = 0.1;
+        }
+    }
 }
