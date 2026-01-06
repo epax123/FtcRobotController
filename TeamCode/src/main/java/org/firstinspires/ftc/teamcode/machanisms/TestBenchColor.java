@@ -20,6 +20,7 @@ public class TestBenchColor {
 
     public void init(HardwareMap hwMap){
     colorSensor = hwMap.get(NormalizedColorSensor.class, "left_color_sensor");
+    colorSensor.setGain(10);
     }
 
     public DetectedColor getDetectedColor(Telemetry telemetry){
@@ -31,8 +32,15 @@ public class TestBenchColor {
         normBlue = colors.blue / colors.alpha;
 
         telemetry.addData("Red",normRed);
-        telemetry.addData("Green",normBlue);
+        telemetry.addData("Green",normGreen);
         telemetry.addData("Blue",normBlue);
+
+        /*
+        Red, Green, Blue
+        Red =
+        Green =
+        Blue =
+         */
 
         return DetectedColor.UNKNOWN;
     }
