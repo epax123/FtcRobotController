@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.machanisms;
 
-import com.qualcomm.hardware.lynx.commands.core.LynxI2cConfigureChannelCommand;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -78,10 +77,10 @@ public class MecanumDriveFO {
         this.drive(newForward, newStrafe, rotate);
     }
 
-    public void variableSpeed(boolean dpadDown, boolean dpadUp){
-        if (dpadUp){
+    public void variableSpeed(Integer speed){
+        if (speed = 2){
             maxSpeed = 0.75;
-        } else if (dpadDown) {
+        } else if (speed = 2) {
             maxSpeed = 0.1;
         }
     }

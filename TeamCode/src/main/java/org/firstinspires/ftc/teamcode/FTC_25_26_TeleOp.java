@@ -13,16 +13,18 @@ public class FTC_25_26_TeleOp extends OpMode {
     MecanumDriveFO driveFO = new MecanumDriveFO();
     Intake intake = new Intake();
     Shooter shooter = new Shooter();
+    Spindexer spindex = new Spindexer();
 
     double forward, strafe, rotate, intakePower;
-    boolean dpadUp, dpadDown;
-    boolean L1, L2, R1;
-
+    boolean up, down, right, left, tri, sqr;
+    boolean r1, r2, l1;
+    Integer hood, speed;
     @Override
     public void init() {
         driveFO.init(hardwareMap);
         intake.init(hardwareMap);
         shooter.init(hardwareMap);
+        spindex.init(hardwareMap);
     }
 
     @Override
@@ -30,24 +32,45 @@ public class FTC_25_26_TeleOp extends OpMode {
         forward = gamepad1.left_stick_y/2;
         strafe = gamepad1.left_stick_x/2;
         rotate = gamepad1.right_stick_x/2;
-        L1 = gamepad1.left_bumper;
-        L2 = gamepad1.left_trigger > 0.3;
-        R1 = gamepad1.right_bumper;
+        l1 = gamepad1.left_bumper;
+        r2 = gamepad1.right_trigger > 0.3;
+        r1 = gamepad1.right_bumper;
+        tri = gamepad1.triangle;
+        sqr = gamepad1.square;
+        up = gamepad1.dpad_up;
+        down = gamepad1.dpad_down;
+        right = gamepad1.dpad_right;
+        left = gamepad1.dpad_left;
 
-        dpadUp = gamepad1.dpad_up;
-        dpadDown = gamepad1.dpad_down;
-
-        if (L1){
+        if (l1){
             intakePower = 1;
-        } else if (L2) {
+        } else if (r1) {
             intakePower = -1;
         } else {
             intakePower = 0;
         }
 
+        if (tri){
+            speed += 1;
+        } else if (speed > 1) {
+            speed = 0;
+        }
+
+        if (up){
+            hood += 1;
+        } else if (down) {
+            hood -= 1;
+        } else if (hood > 3) {
+            hood = 3;
+        } else if (hood < 1) {
+            hood = 1;
+        }
+
         driveFO.driveFieldReltive(forward, strafe, rotate);
         intake.intake(intakePower);
-        driveFO.variableSpeed(dpadDown, dpadUp);
-        shooter.shooter(R1);
+        driveFO.variableSpeed(speed);
+        shooter.shooter(r2);
+        shooter.Hood(hood);
+        spindex.Input(right, left, sqr);
 }
 }
