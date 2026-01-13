@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class MecanumDriveFO {
@@ -77,11 +78,11 @@ public class MecanumDriveFO {
         this.drive(newForward, newStrafe, rotate);
     }
 
-    public void variableSpeed(Integer speed){
-        if (speed = 2){
+    public void variableSpeed(double speed){
+        if (speed == 1){
             maxSpeed = 0.75;
-        } else if (speed = 2) {
-            maxSpeed = 0.1;
+        } else if (speed <= 2) {
+            maxSpeed = 1;
         }
     }
 }

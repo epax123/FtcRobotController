@@ -15,16 +15,16 @@ public class FTC_25_26_TeleOp extends OpMode {
     Shooter shooter = new Shooter();
     Spindexer spindex = new Spindexer();
 
-    double forward, strafe, rotate, intakePower;
+    double forward, strafe, rotate, intakePower, hood, speed;
     boolean up, down, right, left, tri, sqr;
     boolean r1, r2, l1;
-    Integer hood, speed;
     @Override
     public void init() {
         driveFO.init(hardwareMap);
         intake.init(hardwareMap);
         shooter.init(hardwareMap);
         spindex.init(hardwareMap);
+        speed = 1;
     }
 
     @Override
@@ -51,15 +51,15 @@ public class FTC_25_26_TeleOp extends OpMode {
         }
 
         if (tri){
-            speed += 1;
-        } else if (speed > 1) {
-            speed = 0;
+            speed += .05;
+        } else if (speed > 2) {
+            speed = 1;
         }
 
         if (up){
-            hood += 1;
+            hood += .05;
         } else if (down) {
-            hood -= 1;
+            hood -= .05;
         } else if (hood > 3) {
             hood = 3;
         } else if (hood < 1) {
@@ -72,5 +72,8 @@ public class FTC_25_26_TeleOp extends OpMode {
         shooter.shooter(r2);
         shooter.Hood(hood);
         spindex.Input(right, left, sqr);
+
+        telemetry.addData("Hood", hood);
+        telemetry.addData("Speed", speed);
 }
 }

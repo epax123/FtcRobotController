@@ -35,13 +35,13 @@ public class Shooter {
         }
     }
 
-    public void Hood (Integer hood) {
-        if (hood ==1){
+    public void Hood (double hood) {
+        if (hood <= 1){
             hood_Servo.setPosition(1);
-        } else if (hood == 2) {
+        } else if (hood < 2) {
+            hood_Servo.setPosition(0.5);
+        } else if (hood <= 3) {
             hood_Servo.setPosition(0);
-        } else if (hood == 3) {
-            hood_Servo.setPosition(-1);
         }
     }
 }
