@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.machanisms;
+package org.firstinspires.ftc.teamcode.samples.ExampleMechanisms;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.HardwareMap;

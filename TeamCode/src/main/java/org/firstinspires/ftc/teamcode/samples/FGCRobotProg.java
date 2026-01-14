@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.samples;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.machanisms.FGCRobotMotors;
+import org.firstinspires.ftc.teamcode.samples.ExampleMechanisms.FGCRobotMotors;
 @Disabled
 @TeleOp
 public class FGCRobotProg extends OpMode {

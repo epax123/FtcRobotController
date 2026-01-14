@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.machanisms;
+package org.firstinspires.ftc.teamcode.samples.ExampleMechanisms;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;

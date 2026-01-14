@@ -1,11 +1,12 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.TeamCode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.machanisms.Intake;
-import org.firstinspires.ftc.teamcode.machanisms.MecanumDriveFO;
-import org.firstinspires.ftc.teamcode.machanisms.Shooter;
+import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.Intake;
+import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.MecanumDriveFO;
+import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.Shooter;
+import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.Spindexer;
 
 @TeleOp
 public class FTC_25_26_TeleOp extends OpMode {

@@ -1,26 +1,21 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.samples;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import java.security.PublicKey;
 @Disabled
-@Autonomous
-public class HelloWorld extends OpMode {
-
+@TeleOp
+public class IfPractice extends OpMode {
     @Override
     public void init() {
-
-        telemetry.addData("Hello","Mylan(cuz she my world)");
 
     }
 
     @Override
     public void loop() {
+        double leftY = gamepad1.left_stick_y;
 
-
-
+        telemetry.addData("Left Y Value", leftY);
     }
 }

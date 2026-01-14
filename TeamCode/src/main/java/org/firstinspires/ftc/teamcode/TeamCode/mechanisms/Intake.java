@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.machanisms;
+package org.firstinspires.ftc.teamcode.TeamCode.mechanisms;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -13,8 +13,13 @@ public class Intake {
         Intake.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
-    public void intake(double intakePower)
-    {
-        Intake.setPower(intakePower);
+    public void intake(boolean L1, boolean L2){
+        if (L1){
+            Intake.setPower(1);
+        } else if (L2) {
+            Intake.setPower(-1);
+        }else{
+            Intake.setPower(0);
+        }
     }
 }
