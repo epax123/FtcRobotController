@@ -23,7 +23,7 @@ public class FTC_25_26_TeleOp extends OpMode {
     public void init() {
         driveFO.init(hardwareMap);
         intake.init(hardwareMap);
-        shooter.init(hardwareMap);
+        shooter.init(hardwareMap, telemetry);
         spindex.init(hardwareMap);
         speed = 1;
     }
@@ -55,7 +55,7 @@ public class FTC_25_26_TeleOp extends OpMode {
         intake.intake(l1,r1);
         intake.intake(l1,l2);
         driveFO.variableSpeed(speed);
-        shooter.shooter(l2);
+        shooter.shooter(sqr, gamepad1.cross);
         shooter.Hood(r2);
         spindex.Input(right, left, sqr);
 
