@@ -79,7 +79,7 @@ public class MecanumDriveFO {
 
     public void variableSpeed(double speed){
         if (speed == 1){
-            maxSpeed = 0.75;
+            maxSpeed = 0.5;
         } else if (speed <= 2) {
             maxSpeed = 1;
         }

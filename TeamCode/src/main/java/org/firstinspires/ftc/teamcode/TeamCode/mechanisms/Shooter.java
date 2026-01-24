@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Shooter {
     private DcMotor shooter1, shooter2;
-    private Servo hood_Servo;
+    private Servo hood_Servo, shooter_Gate;
 
     private double hood;
 
@@ -15,6 +15,7 @@ public class Shooter {
         shooter1 = hwMap.get(DcMotor.class, "shooter1");
         shooter2 = hwMap.get(DcMotor.class, "shooter2");
         hood_Servo = hwMap.get(Servo.class, "hood_servo");
+        shooter_Gate = hwMap.get(Servo.class,"servo_gate");
 
         shooter1.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -36,7 +37,7 @@ public class Shooter {
             shooter2.setPower(0);
         }
     }
-
+    
     public void Hood(boolean cycle) {
         if (cycle) {
             hood += .05;
@@ -50,6 +51,5 @@ public class Shooter {
             } else if (hood <= 3) {
                 hood_Servo.setPosition(0);
             }
-        }
-    }
-}
+           
+        }}}
