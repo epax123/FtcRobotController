@@ -15,8 +15,8 @@ public class FlyWheelTuner extends OpMode {
 
     public double highVelocity =1500, lowVelocity =900;
     public double curTargetVelocity = highVelocity;
-    float F;
-    float P;
+    double F;
+    double P;
 
     double[] stepSizes = {10.0, 1.0, 0.1, 0.01, 0.001};
 
