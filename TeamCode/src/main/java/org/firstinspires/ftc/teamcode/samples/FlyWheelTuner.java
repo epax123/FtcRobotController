@@ -11,12 +11,12 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 @TeleOp
 public class FlyWheelTuner extends OpMode {
 
-    public DcMotorEx FlyWheel;
+    public DcMotorEx FlyWheel1, FlyWheel2;
 
     public double highVelocity =1500, lowVelocity =900;
     public double curTargetVelocity = highVelocity;
-    double F = 0;
-    double P = 0;
+    float F;
+    float P;
 
     double[] stepSizes = {10.0, 1.0, 0.1, 0.01, 0.001};
 
@@ -24,10 +24,10 @@ public class FlyWheelTuner extends OpMode {
 
     @Override
     public void init() {
-        FlyWheel = hardwareMap.get(DcMotorEx.class, "fly_wheel");
-        FlyWheel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        FlyWheel1 = hardwareMap.get(DcMotorEx.class, "shooter1");
+        FlyWheel1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         PIDFCoefficients pidfCoefficients = new PIDFCoefficients(P, 0, 0, F);
-        FlyWheel.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
+        FlyWheel1.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
         telemetry.addLine("initComplete");
     }
 
@@ -37,7 +37,7 @@ public class FlyWheelTuner extends OpMode {
         if (curTargetVelocity == highVelocity){
             curTargetVelocity = lowVelocity;
         }else{
-            curTargetVelocity = highVelocity
+            curTargetVelocity = highVelocity;
         }
     }
     if (gamepad1.bWasPressed()){
@@ -56,10 +56,10 @@ public class FlyWheelTuner extends OpMode {
         P -= stepSizes[stepIndex];
     }
         PIDFCoefficients pidfCoefficients = new PIDFCoefficients(P, 0, 0, F);
-        FlyWheel.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
-        FlyWheel.setVelocity(curTargetVelocity);
+        FlyWheel1.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
+        FlyWheel1.setVelocity(curTargetVelocity);
 
-        double curVelocity = FlyWheel.getVelocity();
+        double curVelocity = FlyWheel1.getVelocity();
         double error = curTargetVelocity - curVelocity;
 
         telemetry.addData("Target Velocity", curTargetVelocity);

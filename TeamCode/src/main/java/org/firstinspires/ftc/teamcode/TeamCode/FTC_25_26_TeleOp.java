@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.MecanumDriveFO;
 import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.Shooter;
 import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.Spindexer;
 
-@TeleOp
+
 public class FTC_25_26_TeleOp extends OpMode {
 
     MecanumDriveFO driveFO = new MecanumDriveFO();

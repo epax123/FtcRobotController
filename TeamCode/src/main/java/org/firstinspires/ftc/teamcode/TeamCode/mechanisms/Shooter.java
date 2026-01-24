@@ -30,8 +30,8 @@ public class Shooter {
 
     public void shooter(boolean R1) {
         if (R1) {
-            shooter1.setPower(0.75);
-            shooter2.setPower(0.75);
+            shooter1.setPower(0.62);
+            shooter2.setPower(0.62);
         } else {
             shooter1.setPower(0);
             shooter2.setPower(0);

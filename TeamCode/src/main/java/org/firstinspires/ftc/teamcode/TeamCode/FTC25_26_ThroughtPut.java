@@ -1,11 +1,12 @@
 package org.firstinspires.ftc.teamcode.TeamCode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.Intake;
 import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.MecanumDriveFO;
 import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.Shooter;
-
+@TeleOp
 public class FTC25_26_ThroughtPut extends OpMode {
     MecanumDriveFO mecanumDriveFO = new MecanumDriveFO();
     Intake intake  = new Intake();
