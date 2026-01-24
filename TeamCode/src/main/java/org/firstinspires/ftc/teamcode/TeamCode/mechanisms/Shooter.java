@@ -15,7 +15,7 @@ public class Shooter {
         hood_Servo = hwMap.get(Servo.class, "hood_servo");
         shooter_Gate = hwMap.get(Servo.class,"servo_gate");
 
-        shooter1.setDirection(DcMotorSimple.Direction.REVERSE);
+        shooter1.etDirection(DcMotorSimple.Direction.REVERSE);
 
         shooter1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         shooter2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
