@@ -18,7 +18,7 @@ public class FTC_25_26_TeleOp extends OpMode {
 
     double forward, strafe, rotate, intakePower, hood, speed;
     boolean up, down, right, left, tri, sqr;
-    boolean r1, r2, l1;
+    boolean r2, l2, l1;
     @Override
     public void init() {
         driveFO.init(hardwareMap);
@@ -34,22 +34,14 @@ public class FTC_25_26_TeleOp extends OpMode {
         strafe = gamepad1.left_stick_x/2;
         rotate = gamepad1.right_stick_x/2;
         l1 = gamepad1.left_bumper;
+        l2 = gamepad1.left_trigger > 0.3;
         r2 = gamepad1.right_trigger > 0.3;
-        r1 = gamepad1.right_bumper;
         tri = gamepad1.triangle;
         sqr = gamepad1.square;
         up = gamepad1.dpad_up;
         down = gamepad1.dpad_down;
         right = gamepad1.dpad_right;
         left = gamepad1.dpad_left;
-
-        if (l1){
-            intakePower = 1;
-        } else if (r1) {
-            intakePower = -1;
-        } else {
-            intakePower = 0;
-        }
 
         if (tri){
             speed += .05;
@@ -68,7 +60,7 @@ public class FTC_25_26_TeleOp extends OpMode {
         }
 
         driveFO.driveFieldReltive(forward, strafe, rotate);
-        intake.intake(intakePower);
+        intake.intake(l1,l2);
         driveFO.variableSpeed(speed);
         shooter.shooter(r2);
         shooter.Hood(hood);
