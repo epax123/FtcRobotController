@@ -9,7 +9,9 @@ public class Shooter {
     private DcMotor shooter1, shooter2;
     private Servo hood_Servo;
 
-    public void init(HardwareMap hwMap){
+    private double hood;
+
+    public void init(HardwareMap hwMap) {
         shooter1 = hwMap.get(DcMotor.class, "shooter1");
         shooter2 = hwMap.get(DcMotor.class, "shooter2");
         hood_Servo = hwMap.get(Servo.class, "hood_servo");
@@ -25,23 +27,29 @@ public class Shooter {
         hood_Servo.setPosition(1);
     }
 
-    public void shooter (boolean R1) {
-        if (R1){
-            shooter1.setPower(1);
-            shooter2.setPower(1);
-        }else {
+    public void shooter(boolean R1) {
+        if (R1) {
+            shooter1.setPower(0.75);
+            shooter2.setPower(0.75);
+        } else {
             shooter1.setPower(0);
             shooter2.setPower(0);
         }
     }
 
-    public void Hood (double hood) {
-        if (hood <= 1){
-            hood_Servo.setPosition(1);
-        } else if (hood < 2) {
-            hood_Servo.setPosition(0.5);
-        } else if (hood <= 3) {
-            hood_Servo.setPosition(0);
+    public void Hood(boolean cycle) {
+        if (cycle) {
+            hood += .05;
+        } else if (hood > 3) {
+            hood = 0;
+
+            if (hood <= 1) {
+                hood_Servo.setPosition(1);
+            } else if (hood < 2) {
+                hood_Servo.setPosition(0.5);
+            } else if (hood <= 3) {
+                hood_Servo.setPosition(0);
+            }
         }
     }
 }

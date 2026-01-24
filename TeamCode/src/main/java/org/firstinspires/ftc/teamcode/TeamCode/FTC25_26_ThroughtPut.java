@@ -44,7 +44,8 @@ public class FTC25_26_ThroughtPut extends OpMode {
         R1 = gamepad1.right_bumper;
 
         mecanumDriveFO.driveFieldReltive(forwards, strafe, rotate);
-        intake.intake(L1, L2);
-        shooter.shooter(R2);
+        intake.intake(L1, R1);
+        shooter.shooter(L2);
+        shooter.Hood(R2);
     }
 }
