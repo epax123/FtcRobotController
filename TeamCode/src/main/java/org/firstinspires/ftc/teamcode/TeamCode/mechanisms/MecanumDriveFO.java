@@ -23,7 +23,7 @@ public class MecanumDriveFO {
         backRightMotor = hwMap.get(DcMotor.class, "back_right_drive");
 
         backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -46,9 +46,9 @@ public class MecanumDriveFO {
     }
 
     public void drive(double forwards, double strafe, double rotate) {
-        double frontLeftPower = forwards - strafe - rotate;
+        double frontLeftPower = forwards + strafe + rotate;
         double backLeftPower = forwards - strafe + rotate;
-        double frontRightPower = forwards + strafe + rotate;
+        double frontRightPower = forwards - strafe - rotate;
         double backRightPower = forwards + strafe - rotate;
 
         double maxPower = 1;
