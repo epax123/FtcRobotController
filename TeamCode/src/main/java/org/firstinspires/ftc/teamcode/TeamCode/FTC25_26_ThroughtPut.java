@@ -45,6 +45,7 @@ public class FTC25_26_ThroughtPut extends OpMode {
         mecanumDriveFO.driveFieldReltive(forwards, strafe, rotate);
         intake.intake(L1, R1);
         shooter.shooter(sqr,cross);
-        shooter.Hood(R2);
+        shooter.Hood(circle);
+        mecanumDriveFO.variableSpeed(tri);
     }
 }

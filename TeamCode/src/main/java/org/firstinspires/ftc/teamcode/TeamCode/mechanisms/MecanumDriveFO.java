@@ -78,10 +78,10 @@ public class MecanumDriveFO {
         this.drive(newForward, newStrafe, rotate);
     }
 
-    public void variableSpeed(double speed){
-        if (speed == 1){
+    public void variableSpeed(boolean swap){
+        if (swap && maxSpeed == 1){
             maxSpeed = 0.5;
-        } else if (speed <= 2) {
+        } else if (swap && maxSpeed == 0.5) {
             maxSpeed = 1;
         }
     }
