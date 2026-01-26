@@ -31,9 +31,9 @@ public class FTC25_26_ThroughtPut extends OpMode {
         L2 = gamepad1.left_trigger > .2;
         R2 = gamepad1.right_trigger > .5;
 
-        tri = gamepad1.triangle;
+        tri = gamepad1.triangleWasPressed();
         sqr = gamepad1.squareWasPressed();
-        circle = gamepad1.circle;
+        circle = gamepad1.circleWasPressed();
         cross = gamepad1.crossWasPressed();
         up = gamepad1.dpad_up;
         down = gamepad1.dpad_down;
@@ -45,7 +45,7 @@ public class FTC25_26_ThroughtPut extends OpMode {
         mecanumDriveFO.driveFieldReltive(forwards, strafe, rotate);
         intake.intake(L1, R1);
         shooter.shooter(sqr,cross);
-        shooter.Hood(circle);
-        mecanumDriveFO.variableSpeed(tri);
+        shooter.Hood(tri);
+        mecanumDriveFO.variableSpeed(circle);
     }
 }

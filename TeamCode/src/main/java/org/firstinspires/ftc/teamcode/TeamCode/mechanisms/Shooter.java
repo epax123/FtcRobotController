@@ -14,10 +14,10 @@ public class Shooter {
     public DcMotorEx shooter1, shooter2;
     public DcMotor Intake;
     private Servo hood_Servo , ServoGate;
-    public double highVelocity =1500, lowVelocity =900, P = 200, F = 13.298;
+    public double highVelocity =1520, lowVelocity =900, P = 200, F = 13.298;
     double curVelocity;
     public double curTargetVelocity = 0;
-    double[] hood = {1, 2, 3};
+    double[] hood = {3, 2, 1};
     int hoodIndx = 1;
 
 
@@ -35,7 +35,7 @@ public class Shooter {
         shooter1.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
         shooter2.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
 
-        ServoGate.setPosition(0);
+        ServoGate.setPosition(1);
         hood_Servo.setPosition(0);
     }
 
@@ -48,10 +48,10 @@ public class Shooter {
             ServoGate.setPosition(1);
         } else if (sqr) {
             curTargetVelocity = highVelocity;
-            ServoGate.setPosition(0);
+            ServoGate.setPosition(0.5);
         } else if (cross) {
             curTargetVelocity = lowVelocity;
-            ServoGate.setPosition(0);
+            ServoGate.setPosition(0.5);
         }
 
         PIDFCoefficients pidfCoefficients = new PIDFCoefficients(P, 0, 0, F);
@@ -70,9 +70,9 @@ public class Shooter {
         hoodIndx = (hoodIndx + 1) % hood.length;
     }
     if (hood[hoodIndx] == 1){
-        hood_Servo.setPosition(0);
+        hood_Servo.setPosition(.56);
     } else if (hood[hoodIndx] == 2) {
-        hood_Servo.setPosition(0.5);
+        hood_Servo.setPosition(0.8);
     } else if (hood[hoodIndx] == 3) {
         hood_Servo.setPosition(1);
     }

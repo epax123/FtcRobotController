@@ -15,9 +15,9 @@ public class Intake {
 
     public void intake(boolean L1, boolean L2){
         if (L1){
-            Intake.setPower(1);
+            Intake.setPower(.6);
         } else if (L2) {
-            Intake.setPower(-1);
+            Intake.setPower(-.8);
         }else{
             Intake.setPower(0);
         }
