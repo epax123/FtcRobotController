@@ -10,13 +10,14 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class MecanumDriveFO {
-
+    private Telemetry telemetry;
     private DcMotor frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
     private IMU imu;
 
     double maxSpeed = .5;
 
-    public void init(HardwareMap hwMap) {
+    public void init(HardwareMap hwMap, Telemetry telemetry) {
+        this.telemetry = telemetry;
         frontLeftMotor = hwMap.get(DcMotor.class, "front_left_drive");
         backLeftMotor = hwMap.get(DcMotor.class, "back_left_drive");
         frontRightMotor = hwMap.get(DcMotor.class, "front_right_drive");
@@ -63,6 +64,12 @@ public class MecanumDriveFO {
         backLeftMotor.setPower(maxSpeed * (backLeftPower / maxPower));
         frontRightMotor.setPower(maxSpeed * (frontRightPower / maxPower));
         backRightMotor.setPower(maxSpeed * (backRightPower / maxPower));
+
+        telemetry.addData("DT FrontLeft", frontLeftMotor.getPower());
+        telemetry.addData("DT BackLeft", backLeftMotor.getPower());
+        telemetry.addData("DT FrontRight", frontRightMotor.getPower());
+        telemetry.addData("DT BackRight", backRightMotor.getPower());
+        telemetry.addLine("--------------------------");
     }
 
     public void driveFieldReltive(double forward, double strafe, double rotate) {
@@ -84,5 +91,8 @@ public class MecanumDriveFO {
         } else if (swap && maxSpeed == 0.5) {
             maxSpeed = 1;
         }
+
+        telemetry.addData("DT Speed", maxSpeed);
+        telemetry.addLine("--------------------------");
     }
 }

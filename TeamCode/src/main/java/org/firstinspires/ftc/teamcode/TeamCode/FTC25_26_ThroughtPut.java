@@ -7,20 +7,25 @@ import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.Intake;
 import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.MecanumDriveFO;
 import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.ServoGate;
 import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.Shooter;
+import org.firstinspires.ftc.teamcode.samples.ExampleMechanisms.AprilTagLogitech;
+import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
+
 @TeleOp
 public class FTC25_26_ThroughtPut extends OpMode {
     MecanumDriveFO mecanumDriveFO = new MecanumDriveFO();
     Intake intake  = new Intake();
     Shooter shooter = new Shooter();
-    double forwards, strafe, rotate;
+    AprilTagLogitech Cam = new AprilTagLogitech();
+    double forwards, strafe, rotate, bearing;
 
     boolean tri, sqr, circle, cross, up, down, left, right, L1, R1, L2, R2;
 
     @Override
     public void init(){
-        mecanumDriveFO.init(hardwareMap);
+        mecanumDriveFO.init(hardwareMap, telemetry);
         intake.init(hardwareMap);
         shooter.init(hardwareMap, telemetry);
+        Cam.init(hardwareMap,telemetry);
     }
 
     @Override
@@ -33,7 +38,7 @@ public class FTC25_26_ThroughtPut extends OpMode {
 
         tri = gamepad1.triangleWasPressed();
         sqr = gamepad1.squareWasPressed();
-        circle = gamepad1.circle;
+        circle = gamepad1.circleWasPressed();
         cross = gamepad1.crossWasPressed();
         up = gamepad1.dpad_up;
         down = gamepad1.dpad_down;
@@ -42,9 +47,21 @@ public class FTC25_26_ThroughtPut extends OpMode {
         L1 = gamepad1.left_bumper;
         R1 = gamepad1.right_bumper;
 
+
         mecanumDriveFO.driveFieldReltive(forwards, strafe, rotate);
         intake.intake(L1, R1);
         shooter.shooter(sqr,cross);
         shooter.Hood(tri);
+        mecanumDriveFO.variableSpeed(circle);
+        Cam.update();
+        AprilTagDetection id21 = Cam.getTagBySpecificID(21);
+        Cam.displayDetectionTelemetry(id21);
+        bearing = Cam.bearing(id21);
+
+        if (up && bearing > 0){
+            mecanumDriveFO.driveFieldReltive(0,0,bearing * -0.6);
+        } else if (up && bearing < 0) {
+            mecanumDriveFO.driveFieldReltive(0,0,bearing * -0.6);
+        }
     }
 }

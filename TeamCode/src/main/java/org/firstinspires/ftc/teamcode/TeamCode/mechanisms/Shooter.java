@@ -22,7 +22,9 @@ public class Shooter {
 
 
     public void init(HardwareMap hwMap, Telemetry telemetry) {
+
         this.telemetry = telemetry;
+
         hood_Servo = hwMap.get(Servo.class, "hood_servo");
         shooter1 = hwMap.get(DcMotorEx.class, "shooter1");
         shooter2 = hwMap.get(DcMotorEx.class, "shooter2");
@@ -63,6 +65,7 @@ public class Shooter {
         curVelocity = shooter1.getVelocity();
         telemetry.addData("Target Speed", curTargetVelocity);
         telemetry.addData("FlyWheel Speed", curVelocity);
+        telemetry.addLine("-------------------");
     }
     
     public void Hood(boolean cycle) {
@@ -77,5 +80,6 @@ public class Shooter {
         hood_Servo.setPosition(1);
     }
     telemetry.addData("Hood Angle",hood[hoodIndx]);
+    telemetry.addLine("--------------------------");
     }
 }

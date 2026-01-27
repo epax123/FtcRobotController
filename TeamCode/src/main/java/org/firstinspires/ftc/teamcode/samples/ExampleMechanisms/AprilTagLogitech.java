@@ -53,13 +53,22 @@ public class AprilTagLogitech {
         if (detectedID == null){return;}
 
         if (detectedID.metadata != null) {
-            telemetry.addLine(String.format("\n==== (ID %d) %s", detectedID.id, detectedID.metadata.name));
-            telemetry.addLine(String.format("XYZ %6.1f %6.1f %6.1f  (cm)", detectedID.ftcPose.x, detectedID.ftcPose.y, detectedID.ftcPose.z));
-            telemetry.addLine(String.format("PRY %6.1f %6.1f %6.1f  (deg)", detectedID.ftcPose.pitch, detectedID.ftcPose.roll, detectedID.ftcPose.yaw));
-            telemetry.addLine(String.format("RBE %6.1f %6.1f %6.1f  (cm323, deg, deg)", detectedID.ftcPose.range, detectedID.ftcPose.bearing, detectedID.ftcPose.elevation));
+            //telemetry.addLine(String.format("\n==== (ID %d) %s", detectedID.id, detectedID.metadata.name));
+            //telemetry.addLine(String.format("XYZ %6.1f %6.1f %6.1f  (cm)", detectedID.ftcPose.x, detectedID.ftcPose.y, detectedID.ftcPose.z));
+            //telemetry.addLine(String.format("PRY %6.1f %6.1f %6.1f  (deg)", detectedID.ftcPose.pitch, detectedID.ftcPose.roll, detectedID.ftcPose.yaw));
+            telemetry.addLine(String.format("B %6.1f (deg)", detectedID.ftcPose.bearing));
         } else {
-            telemetry.addLine(String.format("\n==== (ID %d) Unknown", detectedID.id));
-            telemetry.addLine(String.format("Center %6.0f %6.0f   (pixels)", detectedID.center.x, detectedID.center.y));
+            //telemetry.addLine(String.format("\n==== (ID %d) Unknown", detectedID.id));
+            //telemetry.addLine(String.format("Center %6.0f %6.0f   (pixels)", detectedID.center.x, detectedID.center.y));
+        }
+    }
+
+    public double bearing (AprilTagDetection detectedID){
+
+        if (detectedID != null && detectedID.ftcPose != null){
+            return detectedID.ftcPose.bearing;
+        }else {
+            return 0;
         }
     }
 
@@ -70,6 +79,7 @@ public class AprilTagLogitech {
         }
         return null;
     }
+
 
     public void stop(){
         if (visionportal != null ){

@@ -21,7 +21,7 @@ public class FTC_25_26_TeleOp extends OpMode {
     boolean r1, r2, l1, l2;
     @Override
     public void init() {
-        driveFO.init(hardwareMap);
+        driveFO.init(hardwareMap,telemetry);
         intake.init(hardwareMap);
         shooter.init(hardwareMap, telemetry);
         spindex.init(hardwareMap);
