@@ -13,11 +13,11 @@ public class Intake {
         Intake.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
-    public void intake(boolean L1, boolean L2){
-        if (L1){
-            Intake.setPower(1);
-        } else if (L2) {
-            Intake.setPower(-1);
+    public void intake(boolean out, boolean in){
+        if (out){
+            Intake.setPower(.6);
+        } else if (in) {
+            Intake.setPower(-.7);
         }else{
             Intake.setPower(0);
         }

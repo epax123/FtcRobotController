@@ -37,7 +37,10 @@ public class Constants {
             .rightFrontEncoderDirection(Encoder.FORWARD)
             .rightRearEncoderDirection(Encoder.FORWARD)
             .robotLength(23.2/2.54)
-            .robotWidth(31/2.54);
+            .robotWidth(31/2.54)
+            .forwardTicksToInches(2.008797684366289)
+            .strafeTicksToInches(0.44002263700367)
+            .turnTicksToInches(6.703713457660032);
     public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1, 1);
 
     public static Follower createFollower(HardwareMap hardwareMap) {
