@@ -6,18 +6,19 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Shooter {
     private Telemetry telemetry;
     public DcMotorEx shooter1, shooter2;
-    public DcMotor Intake;
     private Servo hood_Servo , ServoGate;
-    public double iniVelocity =1500, secVelocity =2600, P = 200, F = 13.298;
+    public double P = 200, F = 13.298;
     double curVelocity;
     public double curTargetVelocity = 0;
     double[] hood = {1, 2, 3};
+    boolean shoot;
     int hoodIndx = 2;
 
 
@@ -28,7 +29,6 @@ public class Shooter {
         hood_Servo = hwMap.get(Servo.class, "hood_servo");
         shooter1 = hwMap.get(DcMotorEx.class, "shooter1");
         shooter2 = hwMap.get(DcMotorEx.class, "shooter2");
-        Intake = hwMap.get(DcMotor.class,"intake");
         ServoGate = hwMap.get(Servo.class,"servo_gate");
         shooter1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         shooter2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -37,23 +37,21 @@ public class Shooter {
         shooter1.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
         shooter2.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
 
-        ServoGate.setPosition(1);
+        ServoGate.setPosition(0);
         hood_Servo.setPosition(1);
     }
 
-    public void shooter(boolean sqr, boolean cross) {
-        if (cross && curTargetVelocity == secVelocity) {
-            curTargetVelocity = 0;
-            ServoGate.setPosition(1);
-        } else if (sqr && curTargetVelocity == iniVelocity) {
-            curTargetVelocity = 0;
-            ServoGate.setPosition(1);
+    public void shooter(boolean sqr, boolean cross, double y) {
+        if (cross) {
+            shoot = true;
         } else if (sqr) {
-            curTargetVelocity = iniVelocity;
-            ServoGate.setPosition(0.5);
-        } else if (cross) {
-            curTargetVelocity = secVelocity;
-            ServoGate.setPosition(0.5);
+            shoot = false;
+        }
+
+        if (shoot){
+            curTargetVelocity = Range.clip(((0.000418556 * y - 0.160725) * y + 22.88692) * y, 0, 2400);
+        }else {
+            curTargetVelocity = 0;
         }
 
         PIDFCoefficients pidfCoefficients = new PIDFCoefficients(P, 0, 0, F);
@@ -65,7 +63,7 @@ public class Shooter {
         curVelocity = shooter1.getVelocity();
         telemetry.addData("Target Speed", curTargetVelocity);
         telemetry.addData("FlyWheel Speed", curVelocity);
-        telemetry.addLine("-------------------");
+        telemetry.addLine("--------------------------");
     }
     
     public void Hood(boolean cycle) {
@@ -75,7 +73,7 @@ public class Shooter {
     if (hood[hoodIndx] == 1){
         hood_Servo.setPosition(0.8);
     } else if (hood[hoodIndx] == 2) {
-        hood_Servo.setPosition(0.56);
+        hood_Servo.setPosition(0.5);
     } else if (hood[hoodIndx] == 3) {
         hood_Servo.setPosition(1);
     }

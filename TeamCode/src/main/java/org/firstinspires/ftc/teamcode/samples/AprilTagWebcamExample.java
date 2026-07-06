@@ -9,18 +9,18 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 @Autonomous
 
 public class AprilTagWebcamExample extends OpMode {
-    AprilTagLogitech aprilTagLogitech = new AprilTagLogitech();
+    AprilTagLogitech aprilTagLogitechTest = new AprilTagLogitech();
 
     @Override
     public void init() {
-    aprilTagLogitech.init(hardwareMap, telemetry);
+    aprilTagLogitechTest.init(hardwareMap, telemetry);
     }
 
     @Override
     public void loop() {
         // update vision portal
-        aprilTagLogitech.update();
-        AprilTagDetection id20 = aprilTagLogitech.getTagBySpecificID(20);
-        aprilTagLogitech.displayDetectionTelemetry(id20);
+        aprilTagLogitechTest.update();
+        AprilTagDetection id20 = aprilTagLogitechTest.getTagBySpecificID(20);
+        aprilTagLogitechTest.displayDetectionTelemetry(id20);
     }
 }

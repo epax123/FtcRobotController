@@ -14,6 +14,7 @@ public class autonRed extends LinearOpMode {
 
     Shooter shoot = new Shooter();
     Intake intake = new Intake();
+    double power = 0.5;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -39,39 +40,36 @@ public class autonRed extends LinearOpMode {
         backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         waitForStart();
-            BackWardsFor(750);
-            shoot.shooter(true, false);
-            sleep(150);
+            BackWardsFor(10560);
+            shoot.shooter(true, false, 0);
+            sleep(250);
             intake.intake(true,false);//shoot first set
-            sleep(300);
+            sleep(250);
             intake.intake(false, true);
-            sleep(1500);
-            shoot.shooter(true,false);
+            sleep(1000);
+            intake.intake(false, true);
+            shoot.shooter(true,false, 0);
             intake.intake(false,false);
 
             TurnRightFor(233.5);//prep to intake 2nd set
-            BackWardsFor(300);
-            StrafeRightFor(600);
+            StrafeRightFor(450);
 
             intake.intake(false,true);//shoot 2nd set
-            ForwardFor(850);
+            ForwardFor(750);
             intake.intake(false,false);
             shoot.Hood(true);
-            shoot.shooter(false,true);
-            BackWardsFor(850);
-            TurnLeftFor(233);
+            shoot.shooter(true,false, 0);
+            BackWardsFor(900);
+            TurnLeftFor(233.5);
             intake.intake(true,false);
             sleep(100);
             intake.intake(false,true);
             sleep(2000);
-            shoot.shooter(false,true);
+            shoot.shooter(true,false, 0);
             intake.intake(false,false);
 
             TurnRightFor(250);
-            ForwardFor(950);
-
-
-
+            ForwardFor(750);
     }
 
     public  void ForwardFor(double mm){
@@ -86,10 +84,10 @@ public class autonRed extends LinearOpMode {
         double ticksPerRevo = 28 * 15; //ticks on HD hex encoders multiplied by gearbox
         int ticks = (int) (rot * ticksPerRevo);
 
-        frontLeftMotor.setPower(.3);
-        backLeftMotor.setPower(.3);
-        frontRightMotor.setPower(.3);
-        backRightMotor.setPower(.3);
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(power);
+        frontRightMotor.setPower(power);
+        backRightMotor.setPower(power);
 
         frontLeftMotor.setTargetPosition(ticks);
         backLeftMotor.setTargetPosition(ticks);
@@ -126,10 +124,10 @@ public class autonRed extends LinearOpMode {
         double ticksPerRevo = 28 * 15; //ticks on HD hex encoders multiplied by gearbox
         int ticks = (int) (rot * ticksPerRevo);
 
-        frontLeftMotor.setPower(.5);
-        backLeftMotor.setPower(.5);
-        frontRightMotor.setPower(.5);
-        backRightMotor.setPower(.5);
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(power);
+        frontRightMotor.setPower(power);
+        backRightMotor.setPower(power);
 
         frontLeftMotor.setTargetPosition(-1*ticks);
         backLeftMotor.setTargetPosition(-1*ticks);
@@ -165,10 +163,10 @@ public class autonRed extends LinearOpMode {
         double ticksPerRevo = 28 * 15; //ticks on HD hex encoders multiplied by gearbox
         int ticks = (int) (rot * ticksPerRevo);
 
-        frontLeftMotor.setPower(.5);
-        backLeftMotor.setPower(.5);
-        frontRightMotor.setPower(.5);
-        backRightMotor.setPower(.5);
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(power);
+        frontRightMotor.setPower(power);
+        backRightMotor.setPower(power);
 
         frontLeftMotor.setTargetPosition(1*ticks);
         backLeftMotor.setTargetPosition(1*ticks);
@@ -204,10 +202,10 @@ public class autonRed extends LinearOpMode {
         double ticksPerRevo = 28 * 15; //ticks on HD hex encoders multiplied by gearbox
         int ticks = (int) (rot * ticksPerRevo);
 
-        frontLeftMotor.setPower(.5);
-        backLeftMotor.setPower(.5);
-        frontRightMotor.setPower(.5);
-        backRightMotor.setPower(.5);
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(power);
+        frontRightMotor.setPower(power);
+        backRightMotor.setPower(power);
 
         frontLeftMotor.setTargetPosition(-1*ticks);
         backLeftMotor.setTargetPosition(-1*ticks);

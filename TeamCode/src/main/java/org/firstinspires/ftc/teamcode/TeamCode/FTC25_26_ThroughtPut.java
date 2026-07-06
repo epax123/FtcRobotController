@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.Intake;
 import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.MecanumDriveFO;
-import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.ServoGate;
 import org.firstinspires.ftc.teamcode.TeamCode.mechanisms.Shooter;
 import org.firstinspires.ftc.teamcode.samples.ExampleMechanisms.AprilTagLogitech;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
@@ -26,6 +25,7 @@ public class FTC25_26_ThroughtPut extends OpMode {
         intake.init(hardwareMap);
         shooter.init(hardwareMap, telemetry);
         Cam.init(hardwareMap,telemetry);
+        mecanumDriveFO.IMUinit(hardwareMap);
     }
 
     @Override
@@ -33,9 +33,9 @@ public class FTC25_26_ThroughtPut extends OpMode {
         forwards = gamepad1.left_stick_y;
         strafe = gamepad1.left_stick_x;
         rotate = gamepad1.right_stick_x;
+
         L2 = gamepad1.left_trigger > .2;
         R2 = gamepad1.right_trigger > .5;
-
         tri = gamepad1.triangleWasPressed();
         sqr = gamepad1.squareWasPressed();
         circle = gamepad1.circleWasPressed();
@@ -50,7 +50,7 @@ public class FTC25_26_ThroughtPut extends OpMode {
 
         mecanumDriveFO.driveFieldReltive(forwards, strafe, rotate);
         intake.intake(L1, R1);
-        shooter.shooter(sqr,cross);
+        shooter.shooter(sqr,cross,0);
         shooter.Hood(tri);
         mecanumDriveFO.variableSpeed(circle);
         Cam.update();
@@ -58,10 +58,8 @@ public class FTC25_26_ThroughtPut extends OpMode {
         Cam.displayDetectionTelemetry(id21);
         bearing = Cam.bearing(id21);
 
-        if (up && bearing > 0){
-            mecanumDriveFO.driveFieldReltive(0,0,bearing * -0.6);
-        } else if (up && bearing < 0) {
-            mecanumDriveFO.driveFieldReltive(0,0,bearing * -0.6);
+        if (up && (bearing > 0.5 || bearing < -0.5)){
+            mecanumDriveFO.driveFieldReltive(0,0,(bearing - 1) * -0.5 );
         }
     }
 }

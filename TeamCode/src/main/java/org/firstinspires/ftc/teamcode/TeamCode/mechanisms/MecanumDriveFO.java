@@ -36,14 +36,6 @@ public class MecanumDriveFO {
         frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        imu = hwMap.get(IMU.class, "imu");
-
-        RevHubOrientationOnRobot RevOrientation = new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
-                RevHubOrientationOnRobot.UsbFacingDirection.UP
-        );
-
-        imu.initialize(new IMU.Parameters(RevOrientation));
     }
 
     public void drive(double forwards, double strafe, double rotate) {
@@ -89,10 +81,21 @@ public class MecanumDriveFO {
         if (swap && maxSpeed == 1){
             maxSpeed = 0.5;
         } else if (swap && maxSpeed == 0.5) {
-            maxSpeed = 1;
+            maxSpeed = .75;       
         }
 
         telemetry.addData("DT Speed", maxSpeed);
         telemetry.addLine("--------------------------");
+    }
+
+    public void IMUinit(HardwareMap hwMap){
+        imu = hwMap.get(IMU.class, "imu");
+
+        RevHubOrientationOnRobot RevOrientation = new RevHubOrientationOnRobot(
+                RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
+                RevHubOrientationOnRobot.UsbFacingDirection.UP
+        );
+
+        imu.initialize(new IMU.Parameters(RevOrientation));
     }
 }

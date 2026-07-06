@@ -55,7 +55,7 @@ public class FTC_25_26_TeleOp extends OpMode {
         intake.intake(l1,r1);
         intake.intake(l1,l2);
         driveFO.variableSpeed(tri);
-        shooter.shooter(sqr, gamepad1.cross);
+        shooter.shooter(sqr, gamepad1.cross, 0);
         shooter.Hood(r2);
         spindex.Input(right, left, sqr);
 
